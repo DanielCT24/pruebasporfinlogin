@@ -57,8 +57,6 @@ function togglePassword(id) {
     input.type = (input.type === "password") ? "text" : "password";
 }
 
-
-
 /* -----------------------------REGISTER-------------------------------- */
 
 // Función para guardar los datos de registro
@@ -76,10 +74,13 @@ function saveUserData() {
         return;
     }
 
-
     // Guardar datos en localStorage
     localStorage.setItem(userDNI, JSON.stringify({ userName, userEmail, userPhone, userPassword }));
     alert("Registro exitoso.");
+
+    // Cambiar a la sección de Login
+    openTab(event, 'loginSection');
+
     document.getElementById('registerForm').reset();
 }
 
@@ -88,11 +89,6 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     event.preventDefault(); // Evitar el envío por defecto
     saveUserData(); // Llama a la función para guardar los datos
 });
-
-
-
-
-
 
 /* -------------------------------LOGIN------------------------------------------ */
 
@@ -114,6 +110,8 @@ function loginUser() {
         document.getElementById('userName1').innerText = storedUserData.userName;
         document.getElementById('userName2').innerText = storedUserData.userName;
 
+        // Cerrar el modal
+        modal.style.display = 'none';
        
     } else {
         alert("DNI o contraseña incorrectos.");
